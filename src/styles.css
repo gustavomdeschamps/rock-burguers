@@ -1333,7 +1333,7 @@ ol {
 
 .gallery__header {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
   align-items: end;
   gap: 1rem 2rem;
 }
@@ -1349,52 +1349,29 @@ ol {
   line-height: 1.6;
 }
 
-.gallery__motion {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.gallery__motion button {
-  min-height: 2.75rem;
-  border: 0;
-  border-bottom: 1px solid var(--muted);
-  background: transparent;
-  color: var(--cream);
-  padding-inline: 0;
-  cursor: pointer;
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition:
-    color var(--ease),
-    border-color var(--ease);
-}
-
-.gallery__motion button:hover {
-  border-color: var(--yellow);
-  color: var(--yellow);
-}
-
 .gallery__viewport {
   margin-top: 2rem;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+  touch-action: pan-x;
+  cursor: grab;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.gallery__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery__viewport:active {
+  cursor: grabbing;
 }
 
 .gallery__rail {
   width: max-content;
   display: flex;
-  animation: gallery-flow 56s linear infinite;
-  will-change: transform;
-}
-
-.gallery__rail.is-paused,
-.gallery__viewport:hover .gallery__rail,
-.gallery__viewport:focus-within .gallery__rail {
-  animation-play-state: paused;
 }
 
 .gallery__group {
@@ -1964,12 +1941,6 @@ ol {
   }
 }
 
-@keyframes gallery-flow {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 @media (max-width: 68rem) {
   .site-header__nav,
   .site-header__order,
@@ -2061,6 +2032,10 @@ ol {
     width: min(100%, 36rem);
   }
 
+  .mascot__copy {
+    order: -1;
+  }
+
   .kids__inner {
     gap: 2.25rem;
   }
@@ -2087,10 +2062,6 @@ ol {
 
   .menu-group:only-child {
     grid-column: 1;
-  }
-
-  .gallery__motion {
-    margin-top: 0.75rem;
   }
 
   .gallery__viewport {
@@ -2194,10 +2165,6 @@ ol {
     overflow-x: auto;
     -webkit-mask-image: none;
     mask-image: none;
-  }
-
-  .gallery__rail {
-    animation: none !important;
   }
 
   .gallery__group[aria-hidden="true"] {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 
 const PHOTOS = [
   {
@@ -66,16 +66,19 @@ const PHOTOS = [
   },
 ] as const;
 
-export function Galeria() {
-  const [isPaused, setIsPaused] = useState(false);
+type PhotoGroupProps = {
+  copyId: string;
+  hidden?: boolean;
+};
 
-  const photoGroup = (duplicate = false) => (
-    <div className="gallery__group" aria-hidden={duplicate || undefined}>
+function PhotoGroup({ copyId, hidden = false }: PhotoGroupProps) {
+  return (
+    <div className="gallery__group" aria-hidden={hidden || undefined}>
       {PHOTOS.map((photo) => (
-        <figure className="gallery__item" key={`${duplicate ? "copy-" : ""}${photo.src}`}>
+        <figure className="gallery__item" key={`${copyId}-${photo.src}`}>
           <img
             src={photo.src}
-            alt={duplicate ? "" : photo.alt}
+            alt={hidden ? "" : photo.alt}
             width={photo.width}
             height={photo.height}
             loading="lazy"
@@ -85,6 +88,88 @@ export function Galeria() {
       ))}
     </div>
   );
+}
+
+export function Galeria() {
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const isInteractingRef = useRef(false);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+
+    if (!viewport) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (reducedMotion.matches) {
+      viewport.scrollLeft = 0;
+      return;
+    }
+
+    const firstGroup = viewport.querySelector<HTMLElement>(".gallery__group");
+    let groupWidth = 0;
+    let animationFrame = 0;
+    let previousTime = 0;
+
+    const measure = () => {
+      const nextWidth = firstGroup?.offsetWidth ?? 0;
+
+      if (!nextWidth || nextWidth === groupWidth) return;
+
+      if (groupWidth === 0) {
+        viewport.scrollLeft = nextWidth;
+      } else {
+        const positionInsideMiddleGroup = (viewport.scrollLeft - groupWidth) / groupWidth;
+        viewport.scrollLeft = nextWidth * (1 + positionInsideMiddleGroup);
+      }
+
+      groupWidth = nextWidth;
+    };
+
+    const keepInsideMiddleCopy = () => {
+      if (!groupWidth) return;
+
+      while (viewport.scrollLeft < groupWidth * 0.5) {
+        viewport.scrollLeft += groupWidth;
+      }
+
+      while (viewport.scrollLeft >= groupWidth * 1.5) {
+        viewport.scrollLeft -= groupWidth;
+      }
+    };
+
+    const move = (time: number) => {
+      if (previousTime === 0) previousTime = time;
+
+      const elapsed = Math.min(time - previousTime, 64);
+      previousTime = time;
+
+      if (!isInteractingRef.current) {
+        viewport.scrollLeft += elapsed * 0.055;
+        keepInsideMiddleCopy();
+      }
+
+      animationFrame = window.requestAnimationFrame(move);
+    };
+
+    const resizeObserver = new ResizeObserver(measure);
+    if (firstGroup) resizeObserver.observe(firstGroup);
+    measure();
+    animationFrame = window.requestAnimationFrame(move);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.cancelAnimationFrame(animationFrame);
+    };
+  }, []);
+
+  const pause = () => {
+    isInteractingRef.current = true;
+  };
+
+  const resume = () => {
+    isInteractingRef.current = false;
+  };
 
   return (
     <section className="gallery" id="fotos" aria-labelledby="gallery-title">
@@ -93,22 +178,24 @@ export function Galeria() {
           <h2 id="gallery-title">Da nossa cozinha</h2>
           <p>Da torrada às porções para dividir: tudo preparado e fotografado dentro da casa.</p>
         </div>
-
-        <div className="gallery__motion">
-          <button
-            type="button"
-            aria-pressed={isPaused}
-            onClick={() => setIsPaused((paused) => !paused)}
-          >
-            {isPaused ? "Continuar" : "Pausar"}
-          </button>
-        </div>
       </header>
 
-      <div className="gallery__viewport" role="region" aria-label="Fotos da cozinha">
-        <div className={`gallery__rail${isPaused ? " is-paused" : ""}`}>
-          {photoGroup()}
-          {photoGroup(true)}
+      <div
+        ref={viewportRef}
+        className="gallery__viewport"
+        role="region"
+        aria-label="Carrossel automático de fotos. Deslize para navegar."
+        tabIndex={0}
+        onTouchStart={pause}
+        onTouchEnd={resume}
+        onTouchCancel={resume}
+        onFocus={pause}
+        onBlur={resume}
+      >
+        <div className="gallery__rail">
+          <PhotoGroup copyId="before" hidden />
+          <PhotoGroup copyId="main" />
+          <PhotoGroup copyId="after" hidden />
         </div>
       </div>
     </section>
