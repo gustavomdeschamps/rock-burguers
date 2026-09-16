@@ -24,6 +24,8 @@ export type MenuItem = {
   nome: string;
   preco?: string;
   meia?: string;
+  descricao?: string;
+  grupo?: string;
 };
 
 export type MenuTab = {
@@ -64,7 +66,7 @@ export const MENU: MenuTab[] = [
       { nome: "Alcatra Acebolada", preco: "45,00" },
       { nome: "Frango com Salada", preco: "32,00" },
       { nome: "Prato de Salada", preco: "24,00" },
-      { nome: "Combo Kids", preco: "35,00" },
+      { nome: "Combo Kids", preco: "33,00" },
     ],
   },
   {
@@ -116,21 +118,82 @@ export const MENU: MenuTab[] = [
   {
     id: "drinks",
     label: "Bebidas",
-    observacao: "Consulte os valores com a equipe.",
+    observacao: "Cervejas, doses, sucos, drinks e bebidas sem álcool.",
     itens: [
-      { nome: "Batida de Coco" },
-      { nome: "Batida de Sorvete" },
-      { nome: "Caipirinha de Vinho" },
-      { nome: "Coquetel Delícia" },
-      { nome: "Milk Shake" },
-      { nome: "Cafézinho da Manhã" },
+      { nome: "Skol", preco: "14,00", grupo: "Cerveja · garrafa" },
+      { nome: "Original", preco: "17,00", grupo: "Cerveja · garrafa" },
+      { nome: "Heineken", preco: "19,00", grupo: "Cerveja · garrafa" },
+      { nome: "Skol", preco: "5,00", grupo: "Cerveja · lata" },
+      { nome: "Heineken", preco: "8,00", grupo: "Cerveja · lata" },
+      { nome: "Heineken Zero", preco: "9,00", grupo: "Cerveja · lata" },
+      { nome: "Campari", preco: "10,00", grupo: "Doses" },
+      { nome: "Passport", preco: "12,00", grupo: "Doses" },
+      { nome: "Drury's", preco: "9,00", grupo: "Doses" },
+      { nome: "Raiska", preco: "8,00", grupo: "Doses" },
+      { nome: "Smirnoff", preco: "10,00", grupo: "Doses" },
+      { nome: "Steinhaeger", preco: "11,00", grupo: "Doses" },
+      { nome: "Johnnie Walker Red", preco: "16,00", grupo: "Doses" },
+      { nome: "Jack Daniel's tradicional", preco: "18,00", grupo: "Doses" },
+      { nome: "Underberg", preco: "12,00", grupo: "Doses" },
+      { nome: "Taça grande", preco: "16,00", grupo: "Vinhos · seco ou suave" },
+      { nome: "Vinho", preco: "18,00", grupo: "Caipirinhas" },
+      { nome: "Raiska", preco: "18,00", grupo: "Caipirinhas" },
+      { nome: "Smirnoff", preco: "20,00", grupo: "Caipirinhas" },
+      { nome: "Steinhaeger", preco: "22,00", grupo: "Caipirinhas" },
+      { nome: "Refrigerante lata", preco: "7,00", grupo: "Refrigerante e água" },
+      { nome: "Refrigerante 600 ml", preco: "10,00", grupo: "Refrigerante e água" },
+      { nome: "Refrigerante 2 litros", preco: "18,00", grupo: "Refrigerante e água" },
+      { nome: "Água mineral", preco: "4,00", grupo: "Refrigerante e água" },
+      { nome: "Água tônica", preco: "8,00", grupo: "Refrigerante e água" },
+      {
+        nome: "Suco de polpa",
+        preco: "12,00",
+        grupo: "Sucos",
+        descricao:
+          "Laranja, acerola, manga, morango, abacaxi, maracujá ou uva e abacaxi com hortelã",
+      },
+      { nome: "Coco com leite", preco: "15,00", grupo: "Sucos" },
+      { nome: "Com leite condensado", preco: "15,00", grupo: "Sucos" },
+      {
+        nome: "Limonada tradicional",
+        preco: "18,00",
+        grupo: "Limonadas",
+        descricao: "Água com ou sem gás",
+      },
+      {
+        nome: "Coquetel de frutas · sem álcool",
+        preco: "20,00",
+        grupo: "Coquetel",
+        descricao: "Sabores dos sucos de polpa",
+      },
+      { nome: "Monster", preco: "15,00", grupo: "Energéticos" },
+      { nome: "Red Bull", preco: "16,00", grupo: "Energéticos" },
+      {
+        nome: "Batidas",
+        preco: "26,00",
+        grupo: "Especiais",
+        descricao: "Alexander, piña colada, morango, maracujá, coco ou vinho",
+      },
+      {
+        nome: "Batida de sorvete",
+        preco: "28,00",
+        grupo: "Especiais",
+        descricao: "Morango, chocolate, coco ou maracujá",
+      },
+      {
+        nome: "Milk-shake",
+        preco: "26,00",
+        grupo: "Especiais",
+        descricao: "Morango, chocolate, coco ou maracujá",
+      },
     ],
   },
 ];
 
 export const NAV_LINKS = [
   { href: "#casa", label: "A casa" },
+  { href: "#combo-kids", label: "Combo Kids" },
   { href: "#cardapio", label: "Cardápio" },
-  { href: "#fotos", label: "Fotos reais" },
+  { href: "#fotos", label: "Galeria" },
   { href: "#visite", label: "Como chegar" },
 ] as const;

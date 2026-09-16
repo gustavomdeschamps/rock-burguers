@@ -4,8 +4,8 @@ Todas as 234 fotos dos três pacotes foram inspecionadas antes da seleção. As 
 
 | Origem no pacote                               | Arquivo final                                             | Uso                                                  | Conteúdo visível                                                 | Motivo da escolha                                                                                               |
 | ---------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `instagram/04-loja-ambiente/instagram-017.jpg` | `public/img/ambiente/salao-parede-vermelha-guitarra.webp` | Fundo do hero — `src/components/site/Hero.tsx:26`    | Salão, parede vermelha, guitarra, quadros e mesas de madeira     | É a foto que melhor concentra a identidade visual real da casa e tem leitura forte no primeiro impacto.         |
-| `instagram/01-lanches/instagram-079.jpg`       | `public/img/lanches/hamburguer-camadas-bacon.webp`        | Plano 3D do hero — `src/components/site/Hero.tsx:79` | Hambúrguer alto em camadas, com queijo, presunto, bacon e cebola | É a imagem de lanche mais expressiva e o formato vertical funciona no recorte sobreposto do hero.               |
+| `instagram/04-loja-ambiente/instagram-017.jpg` | `public/img/ambiente/salao-parede-vermelha-guitarra.webp` | Hero — `src/components/site/Hero.tsx`                 | Salão, parede vermelha, guitarra, quadros e mesas de madeira     | É a foto que melhor concentra a identidade visual real da casa e agora aparece inteira, sem recorte.             |
+| `rock-burguers-combo-kids.zip/fotos/combo-kids-03.jpg` | `public/img/lanches/combo-kids-completo.webp` | Seção Combo Kids — `src/components/site/KidsCombo.tsx` | Embalagem, bebida, mini fritas e brinquedo surpresa | É a composição mais completa do produto e não possui texto sobreposto. |
 | `instagram/04-loja-ambiente/instagram-003.jpg` | `public/img/ambiente/forno-lenha-aceso.webp`              | Seção “A casa” — `src/components/site/Sobre.tsx:15`  | Forno preto aceso, chamas e brasas                               | O fogo e o equipamento estão nítidos; comunica preparo e ambiente sem depender de texto promocional.            |
 | `facebook/04-loja-ambiente/facebook-062.jpg`   | `public/img/ambiente/deck-mesas-madeira-vista.webp`       | Seção “A casa” — `src/components/site/Sobre.tsx:38`  | Deck, mesa, bancos de madeira, vista do bairro e gato laranja    | É a melhor visão do espaço externo e acrescenta um detalhe espontâneo, sem aparência de foto de banco.          |
 | `instagram/01-lanches/instagram-005.jpg`       | `public/img/lanches/torrada-frango-molho.webp`            | Galeria — `src/components/site/Galeria.tsx:3`        | Torrada com cubos de frango e molho cremoso                      | O recheio é legível e apetitoso; a legenda permanece genérica para não atribuir um sabor exato sem confirmação. |
@@ -34,3 +34,7 @@ npx sharp-cli --input ".photo-audit/instagram/01-lanches/instagram-079.jpg" --ou
 ```
 
 O script aplica orientação EXIF, limita a maior dimensão a 1600 px (2000 px no hero), converte para WebP e gera a imagem social em 1200 × 630.
+
+## Marca
+
+A logo fornecida foi restaurada com a ferramenta integrada de geração de imagens, usando a imagem anexada como alvo de edição. O fundo externo foi removido por chroma key e o arquivo final transparente foi salvo em `public/img/marca/logo-rock-burguers-oficial.webp` com 1100 × 1100 px.

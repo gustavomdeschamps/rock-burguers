@@ -13,8 +13,11 @@ export function Localizacao() {
       </div>
 
       <div className="visit__copy" data-reveal>
-        <p className="eyebrow">Como chegar</p>
-        <h2 id="visit-title">A mesa está no Garcia / Valparaíso.</h2>
+        <h2 id="visit-title">Vem para o Rock.</h2>
+        <p className="visit__lead">
+          No Garcia / Valparaíso, em Blumenau — com salão interno e deck para chegar, sentar e
+          curtir sem pressa.
+        </p>
 
         <dl className="visit__facts">
           <div>

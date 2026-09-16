@@ -6,6 +6,7 @@ import { Footer } from "./components/site/Footer";
 import { Galeria } from "./components/site/Galeria";
 import { Header } from "./components/site/Header";
 import { Hero } from "./components/site/Hero";
+import { KidsCombo } from "./components/site/KidsCombo";
 import { Localizacao } from "./components/site/Localizacao";
 import { PageIntro } from "./components/site/PageIntro";
 import { Sobre } from "./components/site/Sobre";
@@ -48,6 +49,7 @@ export function App() {
       <main id="conteudo">
         <Hero />
         <Sobre />
+        <KidsCombo />
         <Cardapio />
         <Galeria />
         <Localizacao />
