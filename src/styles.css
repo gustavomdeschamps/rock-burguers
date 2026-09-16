@@ -972,13 +972,19 @@ ol {
   margin-top: 0;
   display: grid;
   grid-template-columns: minmax(22rem, 1.15fr) minmax(18rem, 0.85fr);
+  grid-template-areas: "photo copy";
   align-items: center;
   gap: clamp(2rem, 5vw, 5rem);
 }
 
 .mascot__photo {
+  grid-area: photo;
   position: relative;
   width: min(100%, 36rem);
+}
+
+.mascot__copy {
+  grid-area: copy;
 }
 
 .mascot__photo::after {
@@ -2025,15 +2031,14 @@ ol {
 
   .mascot {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "copy"
+      "photo";
     gap: 2rem;
   }
 
   .mascot__photo {
     width: min(100%, 36rem);
-  }
-
-  .mascot__copy {
-    order: -1;
   }
 
   .kids__inner {

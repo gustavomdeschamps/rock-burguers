@@ -31,6 +31,14 @@ export function Sobre() {
       </figure>
 
       <article className="mascot" data-reveal aria-labelledby="mascot-title">
+        <div className="mascot__copy">
+          <p className="mascot__label">Mascote da casa</p>
+          <h3 id="mascot-title">O astro do deck.</h3>
+          <p>
+            Entre uma mesa e outra, o gato laranja observa o movimento e já virou parte do cenário
+            do Rock Burguer&apos;s — presença conhecida de quem escolhe sentar no deck.
+          </p>
+        </div>
         <figure className="mascot__photo photo-frame">
           <img
             src="/img/ambiente/deck-mesas-madeira-vista.webp"
@@ -40,14 +48,6 @@ export function Sobre() {
             loading="lazy"
           />
         </figure>
-        <div className="mascot__copy">
-          <p className="mascot__label">Mascote da casa</p>
-          <h3 id="mascot-title">O astro do deck.</h3>
-          <p>
-            Entre uma mesa e outra, o gato laranja observa o movimento e já virou parte do cenário
-            do Rock Burguer&apos;s — presença conhecida de quem escolhe sentar no deck.
-          </p>
-        </div>
       </article>
     </section>
   );
